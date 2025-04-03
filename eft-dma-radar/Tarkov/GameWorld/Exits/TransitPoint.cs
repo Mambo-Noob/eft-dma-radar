@@ -83,9 +83,6 @@ namespace eft_dma_radar.Tarkov.GameWorld.Exits
 
         private static SKPaint GetPaint()
         {
-            var localPlayer = Memory.LocalPlayer;
-            if (!(localPlayer?.IsPmc ?? false))
-                return SKPaints.PaintExfilInactive;
             return SKPaints.PaintExfilTransit;
         }
 
@@ -100,7 +97,7 @@ namespace eft_dma_radar.Tarkov.GameWorld.Exits
 
         public void DrawESP(SKCanvas canvas, LocalPlayer localPlayer)
         {
-            if (!localPlayer.IsPmc)
+            if (Name.ToLower().Contains("lab") && !localPlayer.IsPmc)
                 return;
             if (!CameraManagerBase.WorldToScreen(ref _position, out var scrPos))
                 return;
